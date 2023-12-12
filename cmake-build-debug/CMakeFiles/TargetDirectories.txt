@@ -1,0 +1,3 @@
+/Users/bogomilstoynov/CLionProjects/URM/cmake-build-debug/CMakeFiles/URM.dir
+/Users/bogomilstoynov/CLionProjects/URM/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/bogomilstoynov/CLionProjects/URM/cmake-build-debug/CMakeFiles/rebuild_cache.dir
