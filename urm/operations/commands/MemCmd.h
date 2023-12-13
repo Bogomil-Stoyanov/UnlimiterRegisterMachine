@@ -32,6 +32,11 @@ public:
         return MEM_CMD;
     }
 
+    void changeRange(int newN){
+        x += newN+1;
+        y += newN+1;
+    }
+
 private:
     int x, y;
 };

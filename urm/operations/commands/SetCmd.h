@@ -32,6 +32,10 @@ public:
         return SET_CMD;
     }
 
+    void changeRange(int newN){
+        x += newN+1;
+    }
+
 private:
     int x, y;
 };

@@ -27,11 +27,16 @@ public:
     }
 
     void print() override {
-        std::cout << "MOVE " << x << y << std::endl;
+        std::cout << "MOVE " << x <<" " << y << std::endl;
     }
 
     Name getName() override {
         return MOVE_INST;
+    }
+
+    void changeRange(int newRange){
+        x += newRange+1;
+        y += newRange+1;
     }
 
 private:

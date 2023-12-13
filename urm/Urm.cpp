@@ -11,6 +11,7 @@
 #include "operations/instructions/MoveInst.h"
 #include "operations/instructions/JumpInst.h"
 #include "operations/commands/QuoteCmd.h"
+#include "operations/commands/AddCmd.h"
 
 Urm::~Urm() {
     clear();
@@ -109,10 +110,6 @@ void Urm::move(int x, int y) {
     memory.set(y, memory.get(x));
 }
 
-void Urm::jump(int x, int y, int z) {
-    //TODO jump
-}
-
 void Urm::zeroCmd(int x, int y) {
     for (int i = x; i <= y; i++) {
         zero(i);
@@ -182,7 +179,6 @@ void Urm::loadCmd(const std::string &path) {
 
         } else if (operation->getType() == COMMAND) {
             switch (operation->getName()) {
-                case ADD_CMD:
                 case COMMENT_CMD:
                 case COPY_CMD:
                 case QUOTE_CMD:
@@ -193,7 +189,8 @@ void Urm::loadCmd(const std::string &path) {
             }
 
             if(operation->getName() == ADD_CMD){
-                //TODO ADD
+                auto *add = (AddCmd *) operation;
+                addCmd(add->getFilename());
             }
         }
     }
@@ -203,7 +200,6 @@ void Urm::clear() {
     for (auto &operation: operations) {
         delete operation;
     }
-    rangeFrom = 0;
     rangeTo = 0;
     operations.clear();
     memory.removeAll();
@@ -214,7 +210,15 @@ void Urm::run() {
     int currentLine = 0;
 
     while(currentLine < operations.size()){
+
         Operation* operation = operations[currentLine];
+        if(operation->getName()!=COMMENT_CMD){
+            memCmd(0,7);
+            operation->print();
+        }else{
+            currentLine++;
+            continue;
+        }
         if(operation->getType() == INSTRUCTION){
             applyInstruction(operation, currentLine);
             continue;
@@ -223,6 +227,7 @@ void Urm::run() {
                 case COPY_CMD:{
                     auto *copy = (CopyCmd *) operation;
                     copyCmd(copy->getX(), copy->getY(), copy->getZ());
+                    currentLine++;
                     break;
                 }
                 case QUOTE_CMD:{
@@ -234,17 +239,23 @@ void Urm::run() {
                 case SET_CMD: {
                     auto *set = (SetCmd *) operation;
                     setCmd(set->getX(), set->getY());
+                    currentLine++;
                     break;
                 }
                 case ZERO_CMD: {
                     auto *zero = (ZeroCmd *) operation;
                     zeroCmd(zero->getX(), zero->getY());
+                    currentLine++;
+                    break;
+                }
+                case COMMENT_CMD: {
+                    currentLine++;
                     break;
                 }
             }
         }
 
-        currentLine++;
+
     }
 }
 
@@ -271,7 +282,11 @@ void Urm::applyInstruction(Operation *operation, int &line) {
         case JUMP_INST: {
             auto *jumpInst = (JumpInst *) operation;
             if(memory.get(jumpInst->getX()) == memory.get(jumpInst->getY())){
-                line = instructions[jumpInst->getZ()];
+                if(jumpInst->getZ() >= instructions.size()){
+                   line = operations.size();
+                }else{
+                    line = instructions[jumpInst->getZ()];
+                }
             }else{
                 line++;
             }
@@ -279,3 +294,73 @@ void Urm::applyInstruction(Operation *operation, int &line) {
         }
     }
 }
+
+void Urm::addCmd(const std::string &path) {
+    std::vector<Operation *> newOperations = FileReader::read(path);
+    addSubprogram(newOperations);
+}
+
+void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
+    int oldRangeTo = rangeTo;
+    int oldInstructionSize = instructions.size();
+
+    for(auto& operation: subprogram){
+        if(operation->getType() == INSTRUCTION){
+
+            //changes the range
+            if (operation->getName() == ZERO_INST) {
+                auto *zeroInst = (ZeroInst *) operation;
+                zeroInst->changeRange(oldRangeTo);
+                if(zeroInst->getN() > rangeTo){
+                    rangeTo = zeroInst->getN();
+                }
+            } else if (operation->getName() == INC_INST) {
+                auto *incInst = (IncInst *) operation;
+                incInst->changeRange(oldRangeTo);
+                if(incInst->getN() > rangeTo){
+                    rangeTo = incInst->getN();
+                }
+            } else if (operation->getName() == MOVE_INST) {
+                auto *moveInst = (MoveInst *) operation;
+                moveInst->changeRange(oldRangeTo);
+                if(moveInst->getX() > rangeTo){
+                    rangeTo = moveInst->getX();
+                }
+                if(moveInst->getY() > rangeTo){
+                    rangeTo = moveInst->getY();
+                }
+            } else if (operation->getName() == JUMP_INST) {
+                auto *jumpInst = (JumpInst *) operation;
+                jumpInst->changeRange(oldRangeTo, oldInstructionSize);
+                if(jumpInst->getX() > rangeTo){
+                    rangeTo = jumpInst->getX();
+                }
+                if(jumpInst->getY() > rangeTo){
+                    rangeTo = jumpInst->getY();
+                }
+            }
+
+            operations.push_back(operation);
+            instructions.insert(std::pair<int, int>(instructions.size(), operations.size() - 1));
+
+        } else if (operation->getType() == COMMAND) {
+            switch (operation->getName()) {
+                case ADD_CMD:
+                case COMMENT_CMD:
+                case COPY_CMD:
+                case QUOTE_CMD:
+                case SET_CMD:
+                case ZERO_CMD:
+                    operations.push_back(operation);
+                    break;
+            }
+
+            if(operation->getName() == ADD_CMD){
+                auto *add = (AddCmd *) operation;
+                addCmd(add->getFilename());
+            }
+        }
+    }
+}
+
+

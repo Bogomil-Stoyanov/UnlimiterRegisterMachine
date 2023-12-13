@@ -39,6 +39,12 @@ public:
         }
     }
 
+    void changeRange(int newRange, int newLine){
+        x += newRange+1;
+        y += newRange+1;
+        z += newLine;
+    }
+
     Name getName() override {
         return JUMP_INST;
     }

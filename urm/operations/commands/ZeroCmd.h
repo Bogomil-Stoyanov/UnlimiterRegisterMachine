@@ -32,6 +32,11 @@ public:
         return ZERO_CMD;
     }
 
+    void changeRange(int newX, int newY){
+        x += newX;
+        y += newY;
+    }
+
 private:
     int x, y;
 };

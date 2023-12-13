@@ -25,7 +25,6 @@ private:
     std::vector<Operation*> operations;
     std::map<int, int> instructions;  // maps the instruction number to the index of the operation in the vector
 
-    int rangeFrom = 0;
     int rangeTo = 0;
 
     void readOperation(Operation* operation);
@@ -33,7 +32,6 @@ private:
     void zero(int n);
     void inc(int n);
     void move( int x, int y);
-    void jump(int x, int y, int z);
 
     void zeroCmd(int x, int y);
     void setCmd(int x, int y);
@@ -44,10 +42,11 @@ private:
     void run();
 
     void loadCmd(const std::string& path);
+    void addCmd(const std::string& path);
 
     void applyInstruction(Operation* operation, int& line);
 
-    void addSubprogram();
+    void addSubprogram(std::vector<Operation*>& subprogram);
 
 };
 

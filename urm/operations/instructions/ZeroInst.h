@@ -28,6 +28,10 @@ public:
         return ZERO_INST;
     }
 
+    void changeRange(int newN){
+        n += newN+1;
+    }
+
 private:
     int n;
 };
