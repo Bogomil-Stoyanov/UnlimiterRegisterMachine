@@ -8,6 +8,7 @@
 #include "operations/commands/ZeroCmd.h"
 #include <vector>
 #include <map>
+#include <stack>
 
 
 class Urm {
@@ -47,6 +48,8 @@ private:
     void applyInstruction(Operation* operation, int& line);
 
     void addSubprogram(std::vector<Operation*>& subprogram);
+    std::stack<std::vector<Operation*>> subProgramsOperations;
+
 
 };
 

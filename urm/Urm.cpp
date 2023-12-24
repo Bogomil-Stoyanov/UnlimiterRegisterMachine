@@ -40,7 +40,11 @@ void Urm::start() {
 }
 
 void Urm::readOperation(Operation *operation) {
-    if (operation->getType() == ERROR) return;
+    if (operation->getType() == ERROR){
+        operation->print();
+        delete operation;
+        return;
+    }
     if (operation->getType() == COMMAND) {
         //switch all the commands
         switch (operation->getName()) {
@@ -194,6 +198,26 @@ void Urm::loadCmd(const std::string &path) {
             }
         }
     }
+
+    while(!subProgramsOperations.empty()){
+        std::vector<Operation *> subprograms = subProgramsOperations.top(); subProgramsOperations.pop();
+        for(auto& operation : subprograms){
+            if(operation->getType() == INSTRUCTION){
+                operations.push_back(operation);
+                instructions.insert(std::pair<int, int>(instructions.size(), operations.size() - 1));
+            }else if(operation->getType() == COMMAND){
+                switch (operation->getName()) {
+                    case COMMENT_CMD:
+                    case COPY_CMD:
+                    case QUOTE_CMD:
+                    case SET_CMD:
+                    case ZERO_CMD:
+                        operations.push_back(operation);
+                        break;
+                }
+            }
+        }
+    }
 }
 
 void Urm::clear() {
@@ -213,8 +237,8 @@ void Urm::run() {
 
         Operation* operation = operations[currentLine];
         if(operation->getName()!=COMMENT_CMD){
-            memCmd(0,7);
-            operation->print();
+            //memCmd(0,7);
+            //operation->print();
         }else{
             currentLine++;
             continue;
@@ -304,6 +328,8 @@ void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
     int oldRangeTo = rangeTo;
     int oldInstructionSize = instructions.size();
 
+    std::vector<Operation *> newOperations;
+
     for(auto& operation: subprogram){
         if(operation->getType() == INSTRUCTION){
 
@@ -340,8 +366,7 @@ void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
                 }
             }
 
-            operations.push_back(operation);
-            instructions.insert(std::pair<int, int>(instructions.size(), operations.size() - 1));
+            newOperations.push_back(operation);
 
         } else if (operation->getType() == COMMAND) {
             switch (operation->getName()) {
@@ -351,7 +376,7 @@ void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
                 case QUOTE_CMD:
                 case SET_CMD:
                 case ZERO_CMD:
-                    operations.push_back(operation);
+                    newOperations.push_back(operation);
                     break;
             }
 
@@ -360,7 +385,9 @@ void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
                 addCmd(add->getFilename());
             }
         }
+
     }
+        subProgramsOperations.push(newOperations);
 }
 
 
