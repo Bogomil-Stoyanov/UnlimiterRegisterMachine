@@ -17,6 +17,7 @@
 #include "../operations/instructions/MoveInst.h"
 #include "../operations/instructions/JumpInst.h"
 
+// Converts a string to an Operation
 Operation *Tokenizer::tokenize(const std::string& line) {
 
     std::vector<std::string> args;
@@ -36,28 +37,35 @@ Operation *Tokenizer::tokenize(const std::string& line) {
 
         if (args[0][0] == '/') {
             //probably a command
-            if (args[0] == "/zero" && args.size() == 3) {
+            if (args[0] == "/zero") {
+                if(args.size() != 3) return new Error("Invalid number of arguments");
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new ZeroCmd(x, y);
-            } else if (args[0] == "/set" && args.size() == 3) {
+            } else if (args[0] == "/set" ) {
+                if(args.size() != 3) return new Error("Invalid number of arguments");
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new SetCmd(x, y);
-            } else if (args[0] == "/copy" && args.size() == 4) {
+            } else if (args[0] == "/copy" ) {
+                if(args.size() != 4) return new Error("Invalid number of arguments");
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 int z = std::stoi(args[3]);
                 return new CopyCmd(x, y, z);
-            } else if (args[0] == "/mem" && args.size() == 3) {
+            } else if (args[0] == "/mem" ) {
+                if(args.size() != 3) return new Error("Invalid number of arguments");
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new MemCmd(x, y);
-            } else if (args[0] == "/load" && args.size() == 2) {
+            } else if (args[0] == "/load") {
+                if(args.size() != 2) return new Error("Invalid number of arguments");
                 return new LoadCmd(args[1]);
-            } else if (args[0] == "/run" && args.size() == 1) {
+            } else if (args[0] == "/run") {
+                if(args.size() != 1) return new Error("Invalid number of arguments");
                 return new RunCmd();
-            } else if (args[0] == "/add" && args.size() == 2) {
+            } else if (args[0] == "/add") {
+                if(args.size() != 2) return new Error("Invalid number of arguments");
                 if (args[1].substr(args[1].size() - 4) == ".urm") {
                     return new AddCmd(args[1]);
                 } else {
@@ -78,9 +86,11 @@ Operation *Tokenizer::tokenize(const std::string& line) {
                 }
 
                 return new QuoteCmd(operation);
-            } else if (args[0] == "/code" && args.size() == 1) {
+            } else if (args[0] == "/code") {
+                if(args.size() != 1) return new Error("Invalid number of arguments");
                 return new CodeCmd();
             } else if (args[0] == "/comment") {
+                if(args.size() == 1) return new Error("Invalid number of arguments");
                 std::string comment;
                 for (int i = 1; i < args.size(); ++i) {
                     comment += args[i] + " ";
@@ -114,7 +124,7 @@ Operation *Tokenizer::tokenize(const std::string& line) {
                 }
             }
 
-            return new Error("4");
+            return new Error("Unknown instruction");
         }
     }catch (std::invalid_argument &e) {
         return new Error("Invalid arguments");

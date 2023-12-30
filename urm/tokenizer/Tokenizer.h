@@ -7,6 +7,7 @@
 #include <string>
 #include "../operations/Operation.h"
 
+// Tokenizer class for parsing input and converting it to operations
 class Tokenizer {
 
 public:

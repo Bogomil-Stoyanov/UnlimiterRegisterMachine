@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 
+// Comment command - adds a comment to the program
 class CommentCmd : public Operation {
 public:
     explicit CommentCmd(std::string comment) {

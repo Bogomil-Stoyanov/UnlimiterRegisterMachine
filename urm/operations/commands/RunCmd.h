@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Run command - runs the program
 class RunCmd : public Operation {
 public:
     RunCmd() = default;

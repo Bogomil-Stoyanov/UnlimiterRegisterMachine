@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Set command - sets the value to y of register x
 class SetCmd : public Operation {
 public:
     SetCmd(int x, int y){

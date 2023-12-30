@@ -6,6 +6,7 @@
 
 #include "../Operation.h"
 
+// Increment Instruction - increments the current value of register n
 class IncInst : public Operation{
 public:
     explicit IncInst(int n) {

@@ -389,5 +389,3 @@ void Urm::addSubprogram(std::vector<Operation *> &subprogram) {
     }
         subProgramsOperations.push(newOperations);
 }
-
-

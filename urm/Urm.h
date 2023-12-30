@@ -10,7 +10,7 @@
 #include <map>
 #include <stack>
 
-
+// URM class - the main class of the program, represent an encapsulation of the URM machine
 class Urm {
     //singleton class
     Urm() = default;

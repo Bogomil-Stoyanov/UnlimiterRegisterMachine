@@ -6,6 +6,7 @@
 
 #include "../Operation.h"
 
+// Move Instruction - sets the value of register y to the value of register x
 class MoveInst : public Operation{
 public:
     explicit MoveInst(int x, int y) {

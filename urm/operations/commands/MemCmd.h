@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Memory command - prints the values of the registers from x to y
 class MemCmd : public Operation {
 public:
     MemCmd(int x, int y){

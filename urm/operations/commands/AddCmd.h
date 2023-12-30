@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 
+// Add command - extends the existing program with the program from the given file
 class AddCmd : public Operation {
 public:
     explicit AddCmd(std::string filename) {

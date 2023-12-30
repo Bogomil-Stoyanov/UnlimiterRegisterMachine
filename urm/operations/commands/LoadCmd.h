@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 
+// Load command - loads the program from the given file
 class LoadCmd : public Operation {
 public:
     explicit LoadCmd(std::string filename) {

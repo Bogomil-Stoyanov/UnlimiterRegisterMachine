@@ -6,6 +6,7 @@
 
 #include "../Operation.h"
 
+// Zero Instruction - sets the value of register n to 0
 class ZeroInst : public Operation{
 public:
     explicit ZeroInst(int n){

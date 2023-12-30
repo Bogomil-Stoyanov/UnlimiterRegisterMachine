@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Copy command - copies the contents of z continuous registers starting from x to z continuous registers starting from y
 class CopyCmd : public Operation {
 public:
     CopyCmd(int x, int y, int z){

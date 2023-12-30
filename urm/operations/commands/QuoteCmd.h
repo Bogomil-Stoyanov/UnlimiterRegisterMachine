@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 
+// Quote command - adds a new operator to the program
 class QuoteCmd : public Operation {
 public:
     explicit QuoteCmd(Operation* operation) {

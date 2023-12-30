@@ -67,12 +67,6 @@ build CMakeFiles/URM.dir/urm/sparsedarray/SparsedArray.cpp.o: CXX_COMPILER__URM_
   OBJECT_DIR = CMakeFiles/URM.dir
   OBJECT_FILE_DIR = CMakeFiles/URM.dir/urm/sparsedarray
 
-build CMakeFiles/URM.dir/urm/operations/Operation.cpp.o: CXX_COMPILER__URM_Debug /Users/bogomilstoynov/CLionProjects/URM/urm/operations/Operation.cpp || cmake_object_order_depends_target_URM
-  DEP_FILE = CMakeFiles/URM.dir/urm/operations/Operation.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fcolor-diagnostics -std=gnu++17
-  OBJECT_DIR = CMakeFiles/URM.dir
-  OBJECT_FILE_DIR = CMakeFiles/URM.dir/urm/operations
-
 build CMakeFiles/URM.dir/urm/tokenizer/Tokenizer.cpp.o: CXX_COMPILER__URM_Debug /Users/bogomilstoynov/CLionProjects/URM/urm/tokenizer/Tokenizer.cpp || cmake_object_order_depends_target_URM
   DEP_FILE = CMakeFiles/URM.dir/urm/tokenizer/Tokenizer.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fcolor-diagnostics -std=gnu++17
@@ -93,7 +87,7 @@ build CMakeFiles/URM.dir/urm/util/FileReader.cpp.o: CXX_COMPILER__URM_Debug /Use
 #############################################
 # Link the executable URM
 
-build URM: CXX_EXECUTABLE_LINKER__URM_Debug CMakeFiles/URM.dir/main.cpp.o CMakeFiles/URM.dir/urm/Urm.cpp.o CMakeFiles/URM.dir/urm/sparsedarray/SparsedArray.cpp.o CMakeFiles/URM.dir/urm/operations/Operation.cpp.o CMakeFiles/URM.dir/urm/tokenizer/Tokenizer.cpp.o CMakeFiles/URM.dir/urm/util/FileReader.cpp.o
+build URM: CXX_EXECUTABLE_LINKER__URM_Debug CMakeFiles/URM.dir/main.cpp.o CMakeFiles/URM.dir/urm/Urm.cpp.o CMakeFiles/URM.dir/urm/sparsedarray/SparsedArray.cpp.o CMakeFiles/URM.dir/urm/tokenizer/Tokenizer.cpp.o CMakeFiles/URM.dir/urm/util/FileReader.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/URM.dir
   POST_BUILD = :

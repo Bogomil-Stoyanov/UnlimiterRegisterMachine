@@ -30,6 +30,7 @@ enum Name{
     ERROR_NAME
 };
 
+// Abstract class for all operations
 class Operation {
 
 public:

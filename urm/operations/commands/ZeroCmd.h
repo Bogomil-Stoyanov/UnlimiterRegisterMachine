@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Zero command - sets the value to 0 of registers from x to y
 class ZeroCmd : public Operation {
 public:
     ZeroCmd(int x, int y) {

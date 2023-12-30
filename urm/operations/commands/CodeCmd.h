@@ -5,6 +5,7 @@
 
 #include "../Operation.h"
 
+// Code command - prints the code of the program
 class CodeCmd : public Operation {
 public:
     CodeCmd() = default;

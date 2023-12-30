@@ -6,6 +6,7 @@
 
 #include "../Operation.h"
 
+// Jump Instruction - jumps to line z if x == y, otherwise does nothing
 class JumpInst : public Operation{
 public:
     explicit JumpInst(int x, int y, int z){
