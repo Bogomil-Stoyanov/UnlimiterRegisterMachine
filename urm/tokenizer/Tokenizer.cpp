@@ -32,40 +32,40 @@ Operation *Tokenizer::tokenize(const std::string& line) {
         return new Error("No arguments supplied");
     }
 
-    //TODO ADD CONVERSION CHECKS
     try {
-
+        std::string invalidNumberOfArguments = "Invalid number of arguments, please use /help for a list of operations";
         if (args[0][0] == '/') {
             //probably a command
+            //TODO add /help
             if (args[0] == "/zero") {
-                if(args.size() != 3) return new Error("Invalid number of arguments");
+                if(args.size() != 3) return new Error(invalidNumberOfArguments);
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new ZeroCmd(x, y);
             } else if (args[0] == "/set" ) {
-                if(args.size() != 3) return new Error("Invalid number of arguments");
+                if(args.size() != 3) return new Error(invalidNumberOfArguments);
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new SetCmd(x, y);
             } else if (args[0] == "/copy" ) {
-                if(args.size() != 4) return new Error("Invalid number of arguments");
+                if(args.size() != 4) return new Error(invalidNumberOfArguments);
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 int z = std::stoi(args[3]);
                 return new CopyCmd(x, y, z);
             } else if (args[0] == "/mem" ) {
-                if(args.size() != 3) return new Error("Invalid number of arguments");
+                if(args.size() != 3) return new Error(invalidNumberOfArguments);
                 int x = std::stoi(args[1]);
                 int y = std::stoi(args[2]);
                 return new MemCmd(x, y);
             } else if (args[0] == "/load") {
-                if(args.size() != 2) return new Error("Invalid number of arguments");
+                if(args.size() != 2) return new Error(invalidNumberOfArguments);
                 return new LoadCmd(args[1]);
             } else if (args[0] == "/run") {
-                if(args.size() != 1) return new Error("Invalid number of arguments");
+                if(args.size() != 1) return new Error(invalidNumberOfArguments);
                 return new RunCmd();
             } else if (args[0] == "/add") {
-                if(args.size() != 2) return new Error("Invalid number of arguments");
+                if(args.size() != 2) return new Error(invalidNumberOfArguments);
                 if (args[1].substr(args[1].size() - 4) == ".urm") {
                     return new AddCmd(args[1]);
                 } else {
@@ -87,17 +87,17 @@ Operation *Tokenizer::tokenize(const std::string& line) {
 
                 return new QuoteCmd(operation);
             } else if (args[0] == "/code") {
-                if(args.size() != 1) return new Error("Invalid number of arguments");
+                if(args.size() != 1) return new Error(invalidNumberOfArguments);
                 return new CodeCmd();
             } else if (args[0] == "/comment") {
-                if(args.size() == 1) return new Error("Invalid number of arguments");
+                if(args.size() == 1) return new Error(invalidNumberOfArguments);
                 std::string comment;
                 for (int i = 1; i < args.size(); ++i) {
                     comment += args[i] + " ";
                 }
                 return new CommentCmd(comment);
             } else {
-                return new Error("Unknown command");
+                return new Error("Unknown command, please use /help for a list of operations");
             }
 
         } else {
@@ -124,9 +124,9 @@ Operation *Tokenizer::tokenize(const std::string& line) {
                 }
             }
 
-            return new Error("Unknown instruction");
+            return new Error("Unknown instruction, please use /help for a list of operations");
         }
     }catch (std::invalid_argument &e) {
-        return new Error("Invalid arguments");
+        return new Error("Invalid arguments, please use /help for a list of operations");
     }
 }

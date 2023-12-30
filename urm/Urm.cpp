@@ -22,12 +22,12 @@ Urm *Urm::getInstance() {
     return &instance;
 }
 
-void Urm::start() {
+void Urm::start(std::istream& input) {
     bool isRunning = true;
 
     while (isRunning) {
         std::string line;
-        std::getline(std::cin, line);
+        std::getline(input, line);
 
         if (line == "/stop") {
             isRunning = false;
@@ -37,6 +37,12 @@ void Urm::start() {
         }
     }
     clear();
+}
+
+void Urm::readSingleCommand(std::string input) {
+    Operation *operation = Tokenizer::tokenize(input);
+    operation->print();
+    readOperation(operation);
 }
 
 void Urm::readOperation(Operation *operation) {

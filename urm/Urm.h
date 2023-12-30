@@ -3,6 +3,7 @@
 #define URM_URM_H
 
 #include <iostream>
+#include <istream>
 #include "sparsedarray/SparsedArray.h"
 #include "operations/Operation.h"
 #include "operations/commands/ZeroCmd.h"
@@ -18,7 +19,8 @@ class Urm {
 
     public:
     static Urm* getInstance();
-    void start();
+    void start(std::istream& input);
+    void readSingleCommand(std::string input);
     void clear();
 
 private:
