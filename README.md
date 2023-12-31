@@ -365,7 +365,7 @@ The `Urm` class is the main class representing the URM (Unlimited Register Machi
 - **void loadCmd(const std::string& path)**: Executes the LOAD command to load a URM program from the specified file.
 - **void addCmd(const std::string& path)**: Executes the ADD command to extend the loaded URM program with statements from the specified file.
 - **void applyInstruction(Operation\* operation, int& line)**: Applies the instruction by updating the URM state.
-- **void addSubprogram(std::vector<Operation*>& subprogram)**: Adds a subprogram to the stack for execution.
+- **void addSubprogram(std::vector<Operation\*>& subprogram)**: Adds a subprogram to the stack for execution.
 - **std::stack<std::vector<Operation\*>> subProgramsOperations**: A stack to manage subprograms during execution.
 
 ---
