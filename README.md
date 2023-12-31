@@ -322,11 +322,51 @@ The `Tokenizer` class provides a static method `tokenize` to parse input lines a
 - The `tokenize` method uses space-separated words in the input line to identify the operation and its arguments.
 - It supports various commands and instructions, including error handling for invalid input.
 
-### Implementation Notes
+#### Implementation Notes
 
 - The `Tokenizer` class breaks down the input line using a stringstream and a vector of strings.
 - It checks the operation type based on the first word in the input line and validates the number of arguments for commands.
 - The `Error` class handles cases of invalid or unknown input.
+
+---
+
+### Urm Class
+
+#### Overview
+
+The `Urm` class is the main class representing the URM (Unlimited Register Machine) encapsulation. It serves as a singleton and includes methods for executing URM commands.
+
+#### Public Members
+
+- **static Urm* getInstance()**: Returns the singleton instance of the `Urm` class.
+- **void start(std::istream& input)**: Initiates the URM with input from the specified stream.
+- **void readSingleCommand(std::string input)**: Reads a single URM command from the input string.
+- **void clear()**: Clears the URM state.
+
+#### Private Members
+
+- **SparsedArray memory**: A sparse array to store register values.
+- **std::vector<Operation*> operations**: A vector to store URM operations.
+- **std::map<int, int> instructions**: Maps instruction numbers to the index of the corresponding operation in the vector.
+- **int rangeTo**: Represents the upper limit of the URM program range.
+
+#### Methods
+
+- **void readOperation(Operation* operation)**: Reads and executes a URM operation.
+- **void zero(int n)**: Executes the ZERO instruction on register n.
+- **void inc(int n)**: Executes the INC instruction on register n.
+- **void move(int x, int y)**: Executes the MOVE instruction to set the value of register y to the value of register x.
+- **void zeroCmd(int x, int y)**: Executes the ZERO command to set the values of registers from x to y to 0.
+- **void setCmd(int x, int y)**: Executes the SET command to set the value of register x to y.
+- **void copyCmd(int x, int y, int z)**: Executes the COPY command to copy the contents of z consecutive cells from register x to register y.
+- **void memCmd(int x, int y)**: Executes the MEM command to output the contents of registers from x to y.
+- **void codeCmd()**: Executes the CODE command to output the loaded URM program.
+- **void run()**: Executes the RUN command to run the loaded URM program.
+- **void loadCmd(const std::string& path)**: Executes the LOAD command to load a URM program from the specified file.
+- **void addCmd(const std::string& path)**: Executes the ADD command to extend the loaded URM program with statements from the specified file.
+- **void applyInstruction(Operation* operation, int& line)**: Applies the instruction by updating the URM state.
+- **void addSubprogram(std::vector<Operation*>& subprogram)**: Adds a subprogram to the stack for execution.
+- **std::stack<std::vector<Operation*>> subProgramsOperations**: A stack to manage subprograms during execution.
 
 ---
 
