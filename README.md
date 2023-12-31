@@ -260,6 +260,53 @@ The `Error` class represents an error in the program. It inherits from the `Oper
 
 ---
 
+### SparsedArray Class
+
+#### Overview
+
+The `SparsedArray` class represents a sparse array, implemented using an unordered map to store only non-zero values.
+
+#### Public Members
+
+- **SparsedArray()**: Default constructor to initialize the sparse array.
+- **~SparsedArray()**: Destructor to release resources.
+- **void set(int index, int value)**: Sets the value at the specified index in the sparse array.
+- **int get(int index)**: Returns the value at the specified index in the sparse array.
+- **void remove(int index)**: Removes the value at the specified index from the sparse array.
+- **void removeAll()**: Clears all values from the sparse array.
+- **void print()**: Prints the non-zero values and their corresponding indices in the sparse array.
+
+#### Private Members
+
+- **std::unordered_map<int, int> map**: An unordered map to store non-zero values with their corresponding indices.
+
+#### Usage
+
+```cpp
+// Create a sparse array
+SparsedArray mySparseArray;
+
+// Set values at specific indices
+mySparseArray.set(5, 10);
+mySparseArray.set(10, 20);
+
+// Get values at specific indices
+int value1 = mySparseArray.get(5);  // Returns 10
+int value2 = mySparseArray.get(10); // Returns 20
+
+// Remove value at a specific index
+mySparseArray.remove(5);
+
+// Print non-zero values and their indices
+mySparseArray.print();
+```
+
+#### Note
+
+The `SparsedArray` class provides an efficient way to represent arrays with mostly zero values by only storing non-zero values in the underlying unordered map.
+
+---
+
 ## Conclusion
 
 This URM interpreter provides a flexible and interactive environment for executing URM programs. Users can manipulate memory, load and extend programs, and observe program code. The interpreter adheres to specific rules when extending program scope and ensures proper execution flow. The design emphasizes user-friendly dialog mode interactions, making it a versatile tool for working with URM programs in a controlled manner.
