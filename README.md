@@ -307,6 +307,29 @@ The `SparsedArray` class provides an efficient way to represent arrays with most
 
 ---
 
+### Tokenizer Class
+
+#### Overview
+
+The `Tokenizer` class provides a static method `tokenize` to parse input lines and convert them into corresponding `Operation` objects.
+
+#### Public Members
+
+- **static Operation* tokenize(const std::string& line)**: Parses the input line and returns the corresponding `Operation` object, handling both commands and instructions.
+
+#### Note
+
+- The `tokenize` method uses space-separated words in the input line to identify the operation and its arguments.
+- It supports various commands and instructions, including error handling for invalid input.
+
+### Implementation Notes
+
+- The `Tokenizer` class breaks down the input line using a stringstream and a vector of strings.
+- It checks the operation type based on the first word in the input line and validates the number of arguments for commands.
+- The `Error` class handles cases of invalid or unknown input.
+
+---
+
 ## Conclusion
 
 This URM interpreter provides a flexible and interactive environment for executing URM programs. Users can manipulate memory, load and extend programs, and observe program code. The interpreter adheres to specific rules when extending program scope and ensures proper execution flow. The design emphasizes user-friendly dialog mode interactions, making it a versatile tool for working with URM programs in a controlled manner.
