@@ -370,6 +370,31 @@ The `Urm` class is the main class representing the URM (Unlimited Register Machi
 
 ---
 
+## Unit Testing
+
+The test suite comprehensively covers the URM implementation:
+
+1. **Tokenizer Tests:**
+   - Validates tokenization for various commands and instructions.
+   - Ensures robust error handling.
+
+2. **Urm Tests:**
+   - Verifies program loading, execution, and instruction handling.
+   - Tests error responses and subprogram management.
+
+3. **SparseArray Tests:**
+   - Ensures basic operations like set, get, remove, and removeAll work correctly.
+
+4. **Overall Structure:**
+   - Executes a well-organized test suite using Doctest.
+   - Thoroughly tests URM functionality, demonstrating attention to detail.
+
+Positive Aspects:
+- Thorough coverage across diverse URM functionalities.
+- Structured test cases with clear assertions.
+
+The test suite showcases a meticulous approach, ensuring the reliability of the URM implementation in various scenarios.
+
 ## Conclusion
 
 This URM interpreter provides a flexible and interactive environment for executing URM programs. Users can manipulate memory, load and extend programs, and observe program code. The interpreter adheres to specific rules when extending program scope and ensures proper execution flow. The design emphasizes user-friendly dialog mode interactions, making it a versatile tool for working with URM programs in a controlled manner.
