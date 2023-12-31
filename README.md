@@ -338,7 +338,7 @@ The `Urm` class is the main class representing the URM (Unlimited Register Machi
 
 #### Public Members
 
-- **static Urm* getInstance()**: Returns the singleton instance of the `Urm` class.
+- **static Urm\* getInstance()**: Returns the singleton instance of the `Urm` class.
 - **void start(std::istream& input)**: Initiates the URM with input from the specified stream.
 - **void readSingleCommand(std::string input)**: Reads a single URM command from the input string.
 - **void clear()**: Clears the URM state.
@@ -352,7 +352,7 @@ The `Urm` class is the main class representing the URM (Unlimited Register Machi
 
 #### Methods
 
-- **void readOperation(Operation* operation)**: Reads and executes a URM operation.
+- **void readOperations(Operation\* operation)**: Reads and executes a URM operation.
 - **void zero(int n)**: Executes the ZERO instruction on register n.
 - **void inc(int n)**: Executes the INC instruction on register n.
 - **void move(int x, int y)**: Executes the MOVE instruction to set the value of register y to the value of register x.
@@ -364,9 +364,9 @@ The `Urm` class is the main class representing the URM (Unlimited Register Machi
 - **void run()**: Executes the RUN command to run the loaded URM program.
 - **void loadCmd(const std::string& path)**: Executes the LOAD command to load a URM program from the specified file.
 - **void addCmd(const std::string& path)**: Executes the ADD command to extend the loaded URM program with statements from the specified file.
-- **void applyInstruction(Operation* operation, int& line)**: Applies the instruction by updating the URM state.
+- **void applyInstruction(Operation\* operation, int& line)**: Applies the instruction by updating the URM state.
 - **void addSubprogram(std::vector<Operation*>& subprogram)**: Adds a subprogram to the stack for execution.
-- **std::stack<std::vector<Operation*>> subProgramsOperations**: A stack to manage subprograms during execution.
+- **std::stack<std::vector<Operation\*>> subProgramsOperations**: A stack to manage subprograms during execution.
 
 ---
 
