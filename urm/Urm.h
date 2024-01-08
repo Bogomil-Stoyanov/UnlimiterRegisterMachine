@@ -20,7 +20,7 @@ class Urm {
     public:
     static Urm* getInstance();
     void start(std::istream& input);
-    void readSingleCommand(std::string input);
+    void readSingleCommand(const std::string& input);
     void clear();
 
 private:

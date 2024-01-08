@@ -31,7 +31,29 @@ void Urm::start(std::istream& input) {
 
         if (line == "/stop") {
             isRunning = false;
-        } else {
+        } else if(line == "/help"){
+                std::cout<<"URM Commands:\n"
+                           "\n"
+                           "1. /zero x y       - Set values of registers from x to y to 0.\n"
+                           "2. /set x y        - Set the value of register x to y.\n"
+                           "3. /copy x y z     - Copy the contents of z consecutive cells from register x to register y.\n"
+                           "4. /mem x y        - Output the contents of registers from x to y.\n"
+                           "5. /load filename  - Load a URM program from the specified file.\n"
+                           "6. /run             - Run the loaded URM program.\n"
+                           "7. /add filename   - Extend the loaded URM program with statements from the specified file.\n"
+                           "8. /quote sequence - Execute a sequence of URM commands or operations.\n"
+                           "9. /code            - Output the loaded URM program.\n"
+                           "10. /comment text   - Add a comment to the URM program.\n"
+                           "\n"
+                           "Instructions:\n"
+                           "\n"
+                           "1. ZERO x           - Execute the ZERO instruction on register x.\n"
+                           "2. INC x            - Execute the INC instruction on register x.\n"
+                           "3. MOVE x y         - Execute the MOVE instruction to set the value of register y to the value of register x.\n"
+                           "4. JUMP x y z       - Execute the JUMP instruction based on the values of x, y, and z.\n"
+                           "\n"
+                           "Note: Replace x, y, and z with register numbers or values as needed." << std::endl;
+        }else {
             Operation *operation = Tokenizer::tokenize(line);
             readOperation(operation);
         }
@@ -39,7 +61,7 @@ void Urm::start(std::istream& input) {
     clear();
 }
 
-void Urm::readSingleCommand(std::string input) {
+void Urm::readSingleCommand(const std::string& input) {
     Operation *operation = Tokenizer::tokenize(input);
     operation->print();
     readOperation(operation);

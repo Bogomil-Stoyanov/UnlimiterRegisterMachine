@@ -69,8 +69,6 @@ TEST_CASE("Tokenize CopyCmd") {
     delete result;
 }
 
-// Add more test cases for other commands and instructions...
-
 TEST_CASE("Tokenize ZeroInst") {
     std::string input = "ZERO 5";
     Operation *result = Tokenizer::tokenize(input);
@@ -96,7 +94,7 @@ TEST_CASE("Tokenize MoveInst") {
 }
 
 TEST_CASE("Tokenize Error") {
-    std::string input = "";  // Invalid input to trigger an error
+    std::string input = "";
     Operation *result = Tokenizer::tokenize(input);
     CHECK(result != nullptr);
     CHECK(dynamic_cast<Error *>(result) != nullptr);
@@ -211,48 +209,6 @@ TEST_CASE("Tokenize JumpInst with 3 arguments") {
     delete result;
 }
 
-// SparseArray tests
-
-TEST_CASE("SparsedArray Basic Operations") {
-    SparsedArray arr;
-
-    SUBCASE("Set and Get Values") {
-        arr.set(0, 10);
-        arr.set(3, 30);
-        arr.set(5, 50);
-
-        CHECK(arr.get(0) == 10);
-        CHECK(arr.get(3) == 30);
-        CHECK(arr.get(5) == 50);
-        CHECK(arr.get(1) == 0);
-    }
-
-    SUBCASE("Remove Values") {
-        arr.set(2, 20);
-        arr.set(4, 40);
-
-        arr.remove(2);
-        CHECK(arr.get(2) == 0);
-        CHECK(arr.get(4) == 40);
-
-        arr.remove(4);
-        CHECK(arr.get(4) == 0);
-    }
-
-
-    SUBCASE("Remove All Values") {
-        arr.set(1, 10);
-        arr.set(3, 30);
-        arr.set(5, 50);
-
-        arr.removeAll();
-
-        CHECK(arr.get(1) == 0);
-        CHECK(arr.get(3) == 0);
-        CHECK(arr.get(5) == 0);
-    }
-}
-
 // Urm tests
 
 TEST_CASE("Load program test containing /add") {
@@ -307,11 +263,53 @@ TEST_CASE("Urm readSingleCommand Method") {
 
 }
 
+// SparseArray tests
+
+TEST_CASE("SparsedArray Basic Operations") {
+    SparsedArray arr;
+
+    SUBCASE("Set and Get Values") {
+        arr.set(0, 10);
+        arr.set(3, 30);
+        arr.set(5, 50);
+
+        CHECK(arr.get(0) == 10);
+        CHECK(arr.get(3) == 30);
+        CHECK(arr.get(5) == 50);
+        CHECK(arr.get(1) == 0);
+    }
+
+    SUBCASE("Remove Values") {
+        arr.set(2, 20);
+        arr.set(4, 40);
+
+        arr.remove(2);
+        CHECK(arr.get(2) == 0);
+        CHECK(arr.get(4) == 40);
+
+        arr.remove(4);
+        CHECK(arr.get(4) == 0);
+    }
+
+
+    SUBCASE("Remove All Values") {
+        arr.set(1, 10);
+        arr.set(3, 30);
+        arr.set(5, 50);
+
+        arr.removeAll();
+
+        CHECK(arr.get(1) == 0);
+        CHECK(arr.get(3) == 0);
+        CHECK(arr.get(5) == 0);
+    }
+}
+
 
 int main() {
 
-    //Urm::getInstance()->start(std::cin);
-    doctest::Context().run();
+    Urm::getInstance()->start(std::cin);
+    //doctest::Context().run();
 
     return 0;
 }

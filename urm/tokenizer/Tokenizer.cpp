@@ -36,7 +36,6 @@ Operation *Tokenizer::tokenize(const std::string& line) {
         std::string invalidNumberOfArguments = "Invalid number of arguments, please use /help for a list of operations";
         if (args[0][0] == '/') {
             //probably a command
-            //TODO add /help
             if (args[0] == "/zero") {
                 if(args.size() != 3) return new Error(invalidNumberOfArguments);
                 int x = std::stoi(args[1]);
